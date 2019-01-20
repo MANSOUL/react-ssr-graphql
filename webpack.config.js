@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 
 const browserConfig = {
-  entry: './src/step1/browser/index.js',
+  entry: './src/step2/browser/index.js',
   devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'public'),
@@ -77,7 +77,7 @@ const browserConfig = {
 };
 
 const serverConfig = {
-  entry: './src/step1/server/index.js',
+  entry: './src/step2/server/index.js',
   target: 'node',
   externals: [nodeExternals()],
   output: {
