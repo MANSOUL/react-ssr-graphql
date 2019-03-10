@@ -1,0 +1,14 @@
+.todo-new {
+  width: 400px;
+  padding-top: 20px;
+  margin: 0 auto;
+}
+.todo-new__input {
+  width: 100%;
+  height: 40px;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  background: none;
+  border-bottom: 1px solid #333;
+}

@@ -1,0 +1,33 @@
+.todo-edit {
+  width: 400px;
+  margin: 0 auto;
+}
+.todo-content {
+  font-size: 18px;
+  border-bottom: 1px solid #333;
+  padding: 10px 0;
+}
+.todo-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.todo-btn__done, 
+.todo-btn__delete {
+  width: 50px;
+  padding: 4px 0;
+  color: #fff;
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.todo-btn__done {
+  background-color: #45c5cd;
+}
+
+.todo-btn__delete {
+  background-color: #ff67b0;
+  margin-left: 10px;
+}
