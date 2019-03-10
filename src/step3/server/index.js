@@ -4,14 +4,27 @@ import koaBody from 'koa-body';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import Router from 'koa-router';
+import { ApolloServer } from 'apollo-server-koa';
+
 import App from '../share/App';
 import { StaticRouter } from 'react-router-dom';
 import routesConfig from '../share/routes';
-import Todo from './model/todo';
+import typeDefs from './gql/schema';
+import resolvers from './gql/resolvers';
+import todo from './gql/datasource/todo';
 
 const app = new Koa();
 const router = new Router();
-const todo = new Todo();
+
+const server = new ApolloServer({
+	typeDefs,
+	resolvers,
+	dataSources: () => ({
+		todo
+	})
+});
+
+server.applyMiddleware({ app });
 
 // 因为接下来需要创建别的路由，所以不再使用*通配符
 routesConfig.forEach((r) => {
@@ -44,59 +57,6 @@ routesConfig.forEach((r) => {
     </html>
     `;
   });
-});
-
-// 获取TODO列表
-router.get('/todo/list', ctx => {
-  ctx.body = todo.list();
-});
-
-// 创建新的TODO
-router.post('/todo/create', ctx => {
-  const { content } = ctx.request.body;
-  try {
-    todo.create(content);
-    ctx.body = {
-      success: true
-    };
-  }
-  catch(err) {
-    ctx.body = {
-      success: false
-    };
-  }
-});
-
-// 完成TODO
-router.post('/todo/done/:id', ctx => {
-  const { id } = ctx.request.body;
-  try {
-    todo.done(id);
-    ctx.body = {
-      success: true
-    };
-  }
-  catch(err) {
-    ctx.body = {
-      success: false
-    };
-  }
-});
-
-// 删除TODO
-router.post('/todo/delete/:id', ctx => {
-  const { id } = ctx.request.body;
-  try {
-    todo.delete(id);
-    ctx.body = {
-      success: true
-    };
-  }
-  catch(err) {
-    ctx.body = {
-      success: false
-    };
-  }
 });
 
 app.use(koaBody({
