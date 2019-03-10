@@ -1,9 +1,12 @@
 import fs from 'fs';
+import path from 'path';
+
+const fileDir = path.resolve(__dirname, '../data/todo.json');
 
 class Todo {
 
   load() {
-    this.todos = require('../data/todo.json');
+    this.todos = require(fileDir);
   }
 
   find(id) {
@@ -13,7 +16,7 @@ class Todo {
   }
 
   write() {
-    fs.writeFileSync('../data/todo.json', JSON.stringify(this.todos));
+    fs.writeFileSync(fileDir, JSON.stringify(this.todos));
   }
 
   create(content) {
@@ -23,9 +26,10 @@ class Todo {
       content,
       done: false,
       delete: false,
-      createdAt: Date.now(),
-      updatedAt: Date.now()
+      createdAt: Date.now() + '',
+      updatedAt: Date.now() + ''
     });
+    this.write();
   }
 
   list() {

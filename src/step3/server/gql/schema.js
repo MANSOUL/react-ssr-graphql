@@ -22,8 +22,8 @@ const typeDefs = gql`
   type Todo {
     id: ID!
     content: String
-    updatedAt: Int
-    createdAt: Int
+    updatedAt: String
+    createdAt: String
     done: Boolean
     delete: Boolean
   }

@@ -35,6 +35,7 @@ export default {
         };
       }
       catch (err) {
+        console.log(err);
         return {
           success: false
         };

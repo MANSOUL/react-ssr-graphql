@@ -142,17 +142,6 @@ eval("\n\nvar _stringify = __webpack_require__(/*! babel-runtime/core-js/json/st
 
 /***/ }),
 
-/***/ "./src/step3/server/data/todo.json":
-/*!*****************************************!*\
-  !*** ./src/step3/server/data/todo.json ***!
-  \*****************************************/
-/*! exports provided: default */
-/***/ (function(module) {
-
-eval("module.exports = [];\n\n//# sourceURL=webpack:///./src/step3/server/data/todo.json?");
-
-/***/ }),
-
 /***/ "./src/step3/server/gql/datasource/todo.js":
 /*!*************************************************!*\
   !*** ./src/step3/server/gql/datasource/todo.js ***!
@@ -173,7 +162,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _mod
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  Query: {\n    list: (_, {}, { dataSources }, info) => {\n      const todos = dataSources.todo.list();\n      return {\n        todos\n      };\n    },\n\n    item: (_, { id }, { dataSources }) => {\n      return dataSources.todo.find(id);\n    }\n  },\n\n  Mutation: {\n    create: (_, { content }, { dataSources }) => {\n      try {\n        dataSources.todo.create(content);\n        return {\n          success: true\n        };\n      } catch (err) {\n        return {\n          success: false\n        };\n      }\n    },\n\n    done: (_, { id }, { dataSources }) => {\n      try {\n        dataSources.todo.done(id);\n        return {\n          success: true\n        };\n      } catch (err) {\n        return {\n          success: false\n        };\n      }\n    },\n\n    delete: (_, { id }, { dataSources }) => {\n      try {\n        dataSources.todo.delete(id);\n        return {\n          success: true\n        };\n      } catch (err) {\n        return {\n          success: false\n        };\n      }\n    }\n  }\n});\n\n//# sourceURL=webpack:///./src/step3/server/gql/resolvers.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  Query: {\n    list: (_, {}, { dataSources }, info) => {\n      const todos = dataSources.todo.list();\n      return {\n        todos\n      };\n    },\n\n    item: (_, { id }, { dataSources }) => {\n      return dataSources.todo.find(id);\n    }\n  },\n\n  Mutation: {\n    create: (_, { content }, { dataSources }) => {\n      try {\n        dataSources.todo.create(content);\n        return {\n          success: true\n        };\n      } catch (err) {\n        return {\n          success: false\n        };\n      }\n    },\n\n    done: (_, { id }, { dataSources }) => {\n      try {\n        dataSources.todo.done(id);\n        return {\n          success: true\n        };\n      } catch (err) {\n        console.log(err);\n        return {\n          success: false\n        };\n      }\n    },\n\n    delete: (_, { id }, { dataSources }) => {\n      try {\n        dataSources.todo.delete(id);\n        return {\n          success: true\n        };\n      } catch (err) {\n        return {\n          success: false\n        };\n      }\n    }\n  }\n});\n\n//# sourceURL=webpack:///./src/step3/server/gql/resolvers.js?");
 
 /***/ }),
 
@@ -185,7 +174,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var apollo_server_koa__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! apollo-server-koa */ \"apollo-server-koa\");\n/* harmony import */ var apollo_server_koa__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(apollo_server_koa__WEBPACK_IMPORTED_MODULE_0__);\n\n\nconst typeDefs = apollo_server_koa__WEBPACK_IMPORTED_MODULE_0__[\"gql\"]`\n  \"\"\"\n  Query\n  \"\"\"\n  type Query {\n    list: TodoCollection!\n    item(id: ID!): Todo\n  }\n\n  \"\"\"\n  Todo Collection\n  \"\"\"\n  type TodoCollection {\n    todos: [Todo]!\n  }\n\n  \"\"\"\n  Todo\n  \"\"\"\n  type Todo {\n    id: ID!\n    content: String\n    updatedAt: Int\n    createdAt: Int\n    done: Boolean\n    delete: Boolean\n  }\n\n  \"\"\"\n  Mutation\n  \"\"\"\n  type Mutation {\n    create(\n      content: String!\n    ):Message\n\n    done(\n      id: ID!\n    ):Message\n\n    delete(\n      id: ID!\n    ): Message\n  }\n\n  type Message {\n    success: Boolean!\n  }\n`;\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (typeDefs);\n\n//# sourceURL=webpack:///./src/step3/server/gql/schema.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var apollo_server_koa__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! apollo-server-koa */ \"apollo-server-koa\");\n/* harmony import */ var apollo_server_koa__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(apollo_server_koa__WEBPACK_IMPORTED_MODULE_0__);\n\n\nconst typeDefs = apollo_server_koa__WEBPACK_IMPORTED_MODULE_0__[\"gql\"]`\n  \"\"\"\n  Query\n  \"\"\"\n  type Query {\n    list: TodoCollection!\n    item(id: ID!): Todo\n  }\n\n  \"\"\"\n  Todo Collection\n  \"\"\"\n  type TodoCollection {\n    todos: [Todo]!\n  }\n\n  \"\"\"\n  Todo\n  \"\"\"\n  type Todo {\n    id: ID!\n    content: String\n    updatedAt: String\n    createdAt: String\n    done: Boolean\n    delete: Boolean\n  }\n\n  \"\"\"\n  Mutation\n  \"\"\"\n  type Mutation {\n    create(\n      content: String!\n    ):Message\n\n    done(\n      id: ID!\n    ):Message\n\n    delete(\n      id: ID!\n    ): Message\n  }\n\n  type Message {\n    success: Boolean!\n  }\n`;\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (typeDefs);\n\n//# sourceURL=webpack:///./src/step3/server/gql/schema.js?");
 
 /***/ }),
 
@@ -201,6 +190,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var koa_
 
 /***/ }),
 
+/***/ "./src/step3/server/model sync recursive":
+/*!*************************************!*\
+  !*** ./src/step3/server/model sync ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("function webpackEmptyContext(req) {\n\tvar e = new Error(\"Cannot find module '\" + req + \"'\");\n\te.code = 'MODULE_NOT_FOUND';\n\tthrow e;\n}\nwebpackEmptyContext.keys = function() { return []; };\nwebpackEmptyContext.resolve = webpackEmptyContext;\nmodule.exports = webpackEmptyContext;\nwebpackEmptyContext.id = \"./src/step3/server/model sync recursive\";\n\n//# sourceURL=webpack:///./src/step3/server/model_sync?");
+
+/***/ }),
+
 /***/ "./src/step3/server/model/todo.js":
 /*!****************************************!*\
   !*** ./src/step3/server/model/todo.js ***!
@@ -209,7 +209,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var koa_
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fs */ \"fs\");\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);\n\n\nlet Todo = class Todo {\n\n  load() {\n    this.todos = __webpack_require__(/*! ../data/todo.json */ \"./src/step3/server/data/todo.json\");\n  }\n\n  find(id) {\n    return this.todos.find(item => {\n      return item.id === id;\n    });\n  }\n\n  write() {\n    fs__WEBPACK_IMPORTED_MODULE_0___default.a.writeFileSync('../data/todo.json', JSON.stringify(this.todos));\n  }\n\n  create(content) {\n    this.load();\n    this.todos.push({\n      id: Date.now() + '',\n      content,\n      done: false,\n      delete: false,\n      createdAt: Date.now(),\n      updatedAt: Date.now()\n    });\n  }\n\n  list() {\n    this.load();\n    return this.todos;\n  }\n\n  done(id) {\n    this.load();\n    const item = this.find(id);\n    item.done = true;\n    item.updatedAt = Date.now();\n    this.write();\n  }\n\n  delete(id) {\n    this.load();\n    const item = this.find(id);\n    item.delete = true;\n    item.updatedAt = Date.now();\n    this.write();\n  }\n};\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Todo);\n\n//# sourceURL=webpack:///./src/step3/server/model/todo.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* WEBPACK VAR INJECTION */(function(__dirname) {/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fs */ \"fs\");\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! path */ \"path\");\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nconst fileDir = path__WEBPACK_IMPORTED_MODULE_1___default.a.resolve(__dirname, '../data/todo.json');\n\nlet Todo = class Todo {\n\n  load() {\n    this.todos = __webpack_require__(\"./src/step3/server/model sync recursive\")(fileDir);\n  }\n\n  find(id) {\n    return this.todos.find(item => {\n      return item.id === id;\n    });\n  }\n\n  write() {\n    fs__WEBPACK_IMPORTED_MODULE_0___default.a.writeFileSync(fileDir, JSON.stringify(this.todos));\n  }\n\n  create(content) {\n    this.load();\n    this.todos.push({\n      id: Date.now() + '',\n      content,\n      done: false,\n      delete: false,\n      createdAt: Date.now() + '',\n      updatedAt: Date.now() + ''\n    });\n    this.write();\n  }\n\n  list() {\n    this.load();\n    return this.todos;\n  }\n\n  done(id) {\n    this.load();\n    const item = this.find(id);\n    item.done = true;\n    item.updatedAt = Date.now();\n    this.write();\n  }\n\n  delete(id) {\n    this.load();\n    const item = this.find(id);\n    item.delete = true;\n    item.updatedAt = Date.now();\n    this.write();\n  }\n};\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Todo);\n/* WEBPACK VAR INJECTION */}.call(this, \"/\"))\n\n//# sourceURL=webpack:///./src/step3/server/model/todo.js?");
 
 /***/ }),
 
@@ -414,6 +414,17 @@ eval("module.exports = require(\"koa-router\");\n\n//# sourceURL=webpack:///exte
 /***/ (function(module, exports) {
 
 eval("module.exports = require(\"koa-static\");\n\n//# sourceURL=webpack:///external_%22koa-static%22?");
+
+/***/ }),
+
+/***/ "path":
+/*!***********************!*\
+  !*** external "path" ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"path\");\n\n//# sourceURL=webpack:///external_%22path%22?");
 
 /***/ }),
 
