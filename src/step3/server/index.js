@@ -35,8 +35,12 @@ routesConfig.forEach((r) => {
         styles.forEach(style => css.add(style._getCss()))
       }
     }
+    let result = null;
+    if (r.fetchInitialData) {
+      result = await r.fetchInitialData();
+    }
     const markup = renderToString(
-      <StaticRouter location={ctx.request.url} context={{}}>
+      <StaticRouter location={ctx.request.url} context={{initialData: result}}>
         <App cssContext={cssContext}/>
       </StaticRouter>
     )
@@ -49,6 +53,7 @@ routesConfig.forEach((r) => {
       <title>React 服务端渲染</title>
       <meta charset="utf-8">
       <style>${cssText}</style>
+      <script>window.INITIAL_DATA = ${JSON.stringify(result)}</script>
     </head>
     <body>
       <div id="app">${markup}</div>

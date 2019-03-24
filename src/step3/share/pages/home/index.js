@@ -5,6 +5,20 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 class Home extends React.Component {
 
+  constructor(props) {
+    super(props);
+    let todos;
+    if (__isBrowser__) {
+      todos = window.INITIAL_DATA.list.todos;
+      delete window.INITIAL_DATA;
+    } else {
+      todos = props.staticContext.initialData.list.todos;
+    }
+    this.state = {
+      todos
+    };
+  }
+
   render() {
     return (
       <div className={s['todo-list']}>
@@ -13,12 +27,14 @@ class Home extends React.Component {
           <Link className={s['todo-bar__new']} to="/create">新建</Link>
         </div>
         <ul className={s['todo-ls']}>
-          <li className={s['todo-item']}>
-            <p className={s['todo-item__content']}>学习SSR</p><Link className={s['todo-item__edit']} to="/edit/abcd">编辑</Link>
-          </li>
-          <li className={s['todo-item']}>
-            <p className={s['todo-item__content']}>学习SSR</p><Link className={s['todo-item__edit']} to="/edit/abcd">编辑</Link>
-          </li>
+          {
+            this.state.todos.map(item => (
+              <li className={s['todo-item']} key={item.id}>
+                <p className={s['todo-item__content']}>{item.content}</p>
+                <Link className={s['todo-item__edit']} to={`/edit/${item.id}`}>编辑</Link>
+              </li>
+            ))
+          }
         </ul>
       </div>
     );

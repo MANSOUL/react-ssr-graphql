@@ -1,12 +1,14 @@
 import Home from './pages/home';
 import Create from './pages/create';
 import Edit from './pages/edit';
+import { fetchTodos } from './api';
 
 const routes = [
   {
     path: '/',
     exact: true,
-    component: Home
+    component: Home,
+    fetchInitialData: (...args) => fetchTodos(...args)
   },
   {
     path: '/create',
